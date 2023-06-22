@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <DebugType>pdbonly</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Refit" Version="6.3.2" />
+        <PackageReference Include="Unity" Version="5.11.10" />
+        <PackageReference Include="Unity.ServiceLocation" Version="5.11.1" />
+        <PackageReference Include="Xamarin.Essentials" Version="1.8.0-preview1" />
+        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2599-pre1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\MainPage.xaml.cs">
+        <DependentUpon>MainPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Resources\DishWasherAnimations\online.json" />
+      <EmbeddedResource Include="Resources\DishWasherAnimations\off_to_on.json" />
+      <EmbeddedResource Include="Resources\DishWasherAnimations\running.json" />
+      <EmbeddedResource Include="Resources\DryerAnimations\running.json" />
+      <EmbeddedResource Include="Resources\DryerAnimations\off_to_on.json" />
+      <EmbeddedResource Include="Resources\DryerAnimations\online.json" />
+      <EmbeddedResource Include="Resources\RefrigeratorAnimations\online.json" />
+      <EmbeddedResource Include="Resources\RefrigeratorAnimations\off_to_on.json" />
+      <EmbeddedResource Include="Resources\RefrigeratorAnimations\running.json" />
+      <EmbeddedResource Include="Resources\WashingMachineAnimations\off_to_on.json" />
+      <EmbeddedResource Include="Resources\WashingMachineAnimations\online.json" />
+      <EmbeddedResource Include="Resources\WashingMachineAnimations\running.json" />
+    </ItemGroup>
+</Project>

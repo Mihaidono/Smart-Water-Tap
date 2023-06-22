@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:vm="clr-namespace:MieleSmartWaterTap.ViewModels;assembly=MieleSmartWaterTap"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             ios:Page.UseSafeArea="true"
+             x:Class="MieleSmartWaterTap.Views.SmartWaterTapDetailPage"
+             x:DataType="vm:SmartWaterTapDetailPageViewModel"
+             BindingContext="{Binding Source={StaticResource IUnityContainer},
+                             Converter={StaticResource ViewModelConverter},
+                             ConverterParameter={x:Type vm:SmartWaterTapDetailPageViewModel}}"
+             BackgroundColor="#1f1f1f"
+             Shell.BackgroundColor="#3b3c3e">
+    <Shell.TitleView>
+        <Label Text="Smart Water Tap" VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"
+               FontSize="Large"
+               FontAttributes="Bold" TextColor="#a5a5a5" />
+    </Shell.TitleView>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior
+            Command="{Binding GoBackCommand}"
+            IsEnabled="{Binding CanGoBack}"/>
+    </Shell.BackButtonBehavior>
+    
+    <StackLayout Margin="30">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+            <Frame BackgroundColor="#3b3c3e" BorderColor="#f69c10" Margin="20,10" CornerRadius="10">
+                <Label Text="{Binding TapName}" VerticalOptions="CenterAndExpand" Padding="20,5"
+                       WidthRequest="200" HorizontalTextAlignment="Center"
+                       HorizontalOptions="CenterAndExpand" TextColor="#a5a5a5" BackgroundColor="#3b3c3e"
+                       FontSize="Large" />
+            </Frame>
+            <Frame BackgroundColor="#3b3c3e" BorderColor="#f69c10" Padding="20" Margin="20,10" CornerRadius="10">
+                <Label Text="{Binding TapState}" VerticalOptions="CenterAndExpand" Padding="20,5"
+                       WidthRequest="200" HorizontalTextAlignment="Center"
+                       HorizontalOptions="CenterAndExpand" TextColor="#a5a5a5" BackgroundColor="#3b3c3e"
+                       FontSize="Large" />
+            </Frame>
+        </StackLayout>
+        
+        <Grid>
+            <lottie:AnimationView
+                
+                AnimationSource="EmbeddedResource"
+                Animation="{Binding CurrentLottiePlaying}"
+                AutoPlay="True"
+                RepeatMode="Infinite"
+                WidthRequest="250"
+                HeightRequest="250"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Scale="2"/>
+        </Grid>
+        <Button Text="{Binding RotateButtonText}" Margin="300,20" Padding="20" CornerRadius="40"
+                IsEnabled="{Binding IsRotateCommandAvailable}"
+                Command="{Binding RotateTapCommand}" BackgroundColor="#f69c10" TextColor="#522000" />
+    </StackLayout>
+</ContentPage>

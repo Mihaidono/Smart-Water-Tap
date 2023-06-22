@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MieleSmartWaterTap.ViewModels;assembly=MieleSmartWaterTap"
+             xmlns:models="clr-namespace:MieleSmartWaterTap.Models;assembly=MieleSmartWaterTap"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             x:Class="MieleSmartWaterTap.Views.MainPage"
+             x:DataType="vm:MainPageViewModel"
+             BindingContext="{Binding Source={StaticResource IUnityContainer},
+                             Converter={StaticResource ViewModelConverter},
+                             ConverterParameter={x:Type vm:MainPageViewModel}}"
+             BackgroundColor="#1f1f1f"
+             Shell.BackgroundColor="#3b3c3e">
+    <Shell.TitleView>
+        <Label Text="Smart Water Tap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+               FontSize="Large"
+               FontAttributes="Bold" TextColor="#a5a5a5" />
+    </Shell.TitleView>
+    <StackLayout>
+
+        <StackLayout Padding="20,20,20,0">
+            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                         Command="{Binding RefreshCommand}">
+                <CollectionView ItemsSource="{Binding SmartWaterTaps}" SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:SmartWaterTap">
+                            <Frame Padding="0,8,0,8" BackgroundColor="Transparent" Margin="10">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=GoToSmartWaterTapDetailPage}"
+                                        CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                                <Frame BackgroundColor="Transparent" Padding="0" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal" BackgroundColor="#3b3c3e" Margin="20,0">
+                                        <Image Source="washingMachineWhite.png" HeightRequest="100" Margin="10,0,20,0" />
+                                        <Frame Padding="0" Margin="0" BackgroundColor="Transparent">
+                                            <StackLayout Margin="20">
+                                                <Label Text="{Binding Name}" FontSize="Large"
+                                                       VerticalTextAlignment="Center" VerticalOptions="Center"
+                                                       TextColor="#a5a5a5" />
+                                                <Label Text="{Binding State}" FontSize="Large"
+                                                       VerticalTextAlignment="Center" VerticalOptions="Center"
+                                                       TextColor="#a5a5a5" />
+                                            </StackLayout>
+                                        </Frame>
+                                        <Label Text="{Binding IpAddress}" FontSize="Large"
+                                               VerticalTextAlignment="Center"
+                                               TextColor="#a5a5a5" HorizontalOptions="EndAndExpand" Margin="0,0,50,0" />
+                                    </StackLayout>
+                                </Frame>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
